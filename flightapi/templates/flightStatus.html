@@ -1,0 +1,83 @@
+{% load static %}<!DOCTYPE html>
+<head>  
+    <meta charset="utf-8">
+    <title>Flights</title>
+    <link rel="stylesheet" href="{% static 'css/FlightSearch.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"> 
+    <script src="{% static 'js/ValidateForm.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/AutoSuggestOriginDestination.js' %}"></script> 
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/FlightTablePaginationScript.js' %}"> </script> 
+
+
+</head>
+<body>
+
+  <h1>Check Flight Status</h1>
+  <div id="search_div">
+    <form id="searchForm" name="searchForm" onsubmit="return validateForm()" action="">
+	<input type="text" list="origin_list" name="origin" id="origin" onkeyup="filterOriginUsingRegex(this.value)" placeholder="FROM">
+	<input type="text" list="destination_list" id="destination" name="destination" onkeyup="filterDestinationUsingRegex(this.value)" placeholder="TO">
+	<input type="submit">
+    </form>
+  </div>
+  <!-- data lists for origin and destination will be modified thru' the javascript that handles the onkeyup event -->
+  <datalist id="origin_list"> 
+  </datalist> 
+  <datalist id="destination_list"> 
+  </datalist> 
+  {% if origin %} 
+      <body data-js-vars={{ origin }}>
+  	<script>
+		document.getElementById("origin").value = document.getElementsByTagName('body')[0].getAttribute('data-js-vars');</script>
+  	</script>
+       </body>
+  {% endif %}
+  {% if destination %} 
+      <body data-js-vars2={{ destination }}>
+  	<script>
+		document.getElementById("destination").value = document.getElementsByTagName('body')[0].getAttribute('data-js-vars2');</script>
+  	</script>
+       </body>
+  {% endif %}
+  {% if flights %}
+   <div class="container" id="pages">
+    <table id="flightResults" class="table">
+     <thead class="thead-inverse">
+       <tr>
+         <th>Flight#</th>
+         <th>Origin</th>
+         <th>Destination</th>
+         <th>Origin Full Name</th>
+         <th>Destination Full Name</th>
+         <th>Scheduled Origin Gate</th>
+         <th>Scheduled Destination Gate</th>
+         <th>Out GMT</th>
+         <th>In GMT</th>
+         <th>Off GMT</th>
+         <th>On GMT</th>
+        </tr>
+       </thead>
+       <tbody>
+         {% for aFlight in flights %}
+           <tr>
+             <td> {{ aFlight.flightNum }}</td>
+             <td> {{ aFlight.origin }}</td>
+             <td> {{ aFlight.destination }}</td>
+             <td> {{ aFlight.originFullName }}</td>
+             <td> {{ aFlight.destinationFullName }}</td>
+             <td> {{ aFlight.scheduledOriginGate }}</td>
+             <td> {{ aFlight.scheduledDestinationGate }}</td>
+             <td> {{ aFlight.outGMT }}</td>
+             <td> {{ aFlight.inGMT }}</td>
+             <td> {{ aFlight.offGMT }}</td>
+             <td> {{ aFlight.onGMT }}</td>
+            </tr> 
+          {% endfor %}
+         </tbody>
+        </table>
+       </div>
+      {% endif %}
+
+
+</body>

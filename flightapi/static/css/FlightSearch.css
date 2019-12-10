@@ -1,0 +1,33 @@
+.select2-container {
+  width: 260px;
+}
+.focus {
+  background-color: #ff00ff;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+.pageNumber {
+  padding: 2px;
+}
+input[type=text] {
+    width: 30%;
+    padding: 15px 22px;
+    margin: 10px 5px;
+    box-sizing: border-box; 
+    border: 4px solid #8842d5;
+    border-radius: 30px; 
+}
+input[type=submit]
+{
+	border-top:		2px solid #a3ceda;
+	border-left:		2px solid #a3ceda;
+	border-right:		2px solid #4f6267;
+	border-bottom:		2px solid #4f6267;
+	padding:		10px 20px !important;
+	font-size:		20px !important;
+	background-color:	#c4f1fe;
+	font-weight:		bold;
+	color:			#2d525d;
+    border-radius: 30px; 
+}
